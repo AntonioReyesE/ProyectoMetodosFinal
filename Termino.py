@@ -16,4 +16,4 @@ class Termino(object):
 
 	'''Print con formato de un término '''
 	def printTermino(self):
-		return str(self.constante)+'a'+str(self.numero)+'('+str(self.variable)+')'+'X'+str(self.grado)
+		return str(self.constante)+'a'+str(self.numero)+'('+str(self.variable)+')'+'X^'+str(self.grado)

@@ -16,11 +16,11 @@ class MinimosCuadrados(object):
 
 		'''Método que calcula las sumatorias de x en las potencias según el orden
 		y las regresa en un arreglo'''
-	def calculaSumatoriasX(self):
+	def calculaSumatoriasX(self, i):
 		sumatoriasX = []
 		n = len(self.valores[0])
 		suma = 0
-		for x in xrange(0,n + 1):
+		for x in xrange(0,i):
 			suma = 0
 			for y in range(0 , n):
 				suma = suma + pow(self.valores[0][y], x)
@@ -53,7 +53,7 @@ class MinimosCuadrados(object):
 		'''Método que da formato a las ecuaciones para el sistema'''
 	def formatearEcuaciones(self):
 		ecuaciones = self.creaEcuaciones()
-		sumatoriasX = self.calculaSumatoriasX()
+		sumatoriasX = self.calculaSumatoriasX(ecuaciones[-1].terminos[-1].grado)
 		sumatoriasXY = self.calculaSumatoriasXY()
 		inicial = 0
 		for x in xrange(0,len(ecuaciones)):
