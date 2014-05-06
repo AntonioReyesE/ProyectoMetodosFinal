@@ -3,32 +3,55 @@ from MinimosCuadrados import *
 from Lector import *
 from GaussJordan import *
 from newton import *
+import math
 
 lec = Lector("archivo.txt")
 m = lec.lee()
 
-newton = newton(m)
-newton.DiferenciasFinitas()
-orden = newton.k + 1
-minimos = MinimosCuadrados(orden)
+print "Hola, este programa obtiene una función polinomial a partir de una función tabular"
 
-print "Las ecuaciones: "
+newt = newton(m)
+a = newt.intervalo
+if  a != -1:
+	print "Los incrementos no son constantes, favor de ingresar el orden deseado"
+	orden = int(raw_input("Favor de introducir el orden"))
+	if orden > len(m) - 1:
+		orden = len(m) - 1
+	minimos = MinimosCuadrados(orden)
 
-var = minimos.formatearEcuaciones()
+	print "Las ecuaciones: "
+	var = minimos.formatearEcuaciones()
+	matriz = minimos.transfomaEcuaciones(var)
 
-print len(var[0].terminos)
+	for x in xrange(0,len(var)):
+		print var[x].printPolinomio()
 
-matriz = minimos.transfomaEcuaciones(var)
+	gauss = GaussJordan(matriz)
+	m = gauss.GaussJordan(matriz, orden)
 
-print matriz
+	n = minimos.obtenerResultados(m)
+	p = minimos.arregloPolinomio(n)
 
-gauss = GaussJordan(matriz)
-m = gauss.GaussJordan(matriz, orden)
-print m
+	print "Resultado: "
+	p.printPolinomio()
+else:
+	newt.DiferenciasFinitas()
+	orden = newt.k + 1
+	minimos = MinimosCuadrados(orden)
 
-n = minimos.obtenerResultados(m)
+	print "Las ecuaciones: "
+	var = minimos.formatearEcuaciones()
+	matriz = minimos.transfomaEcuaciones(var)
 
-p = minimos.arregloPolinomio(n)
+	for x in xrange(0,len(var)):
+		print var[x].printPolinomio()
 
-p.printPolinomio()
+	gauss = GaussJordan(matriz)
+	m = gauss.GaussJordan(matriz, orden)
+
+	n = minimos.obtenerResultados(m)
+	p = minimos.arregloPolinomio(n)
+
+	print "Resultado: "
+	p.printPolinomio()
 

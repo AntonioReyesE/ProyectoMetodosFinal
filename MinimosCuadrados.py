@@ -88,7 +88,7 @@ class MinimosCuadrados(object):
 	def arregloPolinomio(self, arreglo):
 		polinomio = Polinomio(len(arreglo),0)
 		for x in xrange(0,len(arreglo)):
-			polinomio.modificaVariableTermino(x,arreglo[x])
+			polinomio.modificaVariableTermino(x,arreglo[x] * -1)
 		return polinomio
 
 			
